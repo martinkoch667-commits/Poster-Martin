@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mon Projet</title>
+    <title>Affiche dynamique — Pixel Bloom</title>
+    <link rel="stylesheet" href="https://use.typekit.net/hac6rgr.css">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
-    <!-- Ici le contenu de votre projet-->
-     <h1>Hello World!</h1>
+  <body class="tk-sztos-variable">
+    <main class="scene">
+      <section class="poster" id="poster" aria-label="Affiche dynamique">
+        <div class="poster__visual">
+          <div class="poster__image"></div>
+          <canvas id="maskCanvas"></canvas>
+        </div>
+
+        <div class="poster__content">
+          <div class="poster__typography">
+            <div class="type-block type-block--huge">
+              <span class="type-copy">
+                Et si <span class="type-word type-word--light">on</span> <span class="type-word type-word--italic">réinventait</span> le <span class="type-word type-word--bold">web</span> ?
+                <span class="type-copy type-copy--negative">
+                  Et si <span class="type-word type-word--light">on</span> <span class="type-word type-word--italic">réinventait</span> le <span class="type-word type-word--bold">web</span> ?
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="poster__peek"></div>
+
+          <div class="poster__info poster__info--transparent">
+            <p class="event">Nuit du web design</p>
+            <p class="date">25 novembre 2026 • 21h</p>
+            <p class="location">Loft Pixel, Paris</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="scripts.js"></script>
   </body>
 </html>

@@ -1,114 +1,455 @@
-* {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	line-height: 1.5;
-	font: inherit;
-	vertical-align: baseline;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizelegibility;
-}
+. * { }
 
-*, *::before, *::after {
-	box-sizing: border-box;
-}
-
-html, body {
-	height: 100%;
-}
-
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	position: relative;
-	display: block;
-}
-
-ol, ul {
-	list-style: none;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-
-a {
-	color: inherit;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-input, button, textarea, select {
-	font: inherit;
-}
-
-input {
-	appearance: none;
-}
-
-audio, canvas, iframe, img, svg, video {
-	display: block;
-	max-width: 100%;
-}
-
-/* Prevents img without src to appear */
-img:not([src]) {
-	visibility: hidden;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Exemple d'intégration de font */
-
-/* Inter Variable 
-https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts
-*/
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  src: url('../fonts/InterVariable.ttf') format('ttf');
-}
-
-/* Inter Variable Italic */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
-  font-style: italic;
-  font-weight: 100 900;
-  src: url('../fonts/InterVariable-Italic.ttf') format('ttf');
-}
-
-/* Placez votre CSS après cette ligne */
-
-/* Variables */
 :root {
-    --black: #111;
-    --white: #FFF;
+  --bg: #07080c;
+  --text: #fbf3e8;
+  --muted: rgba(255, 255, 255, 0.72);
+  --accent: #f3bf75;
 }
 
 body {
-    font-family: 'Inter', helvetica, arial, sans-serif;
-    font-size: 100%;
-    font-weight: 400;
-    line-height: 1.5rem;
-    background-color: var(--white);
-    color: var(--black);
-    -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizelegibility;
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: radial-gradient(circle at top, #272b3d 0%, #07080c 62%, #020203 100%);
+  color: var(--text);
+  font-family: "sztos-variable", "Zero", "Arial", sans-serif;
+  font-weight: 100;
+  font-variation-settings: "wdth" 150, "wght" 100;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scene {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.poster {
+  position: relative;
+  width: min(92vw, 520px);
+  aspect-ratio: 5 / 7;
+  min-height: 700px;
+  overflow: hidden;
+  box-shadow: 0 35px 110px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+}
+
+.poster__visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.poster__image {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/image%20ciel.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+  filter: saturate(1.08) contrast(1.04) brightness(0.9) grayscale(0.04);
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.poster__content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.poster__badge {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.95rem;
+  text-transform: uppercase;
+  font-family: "sztos-variable", "Zero", "Arial", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 100;
+  font-variation-settings: "wdth" 100, "wght" 100;
+  letter-spacing: 0.24em;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.badge--outline {
+  color: #c6e8ff;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(198, 232, 255, 0.45);
+}
+
+.badge.accent {
+  color: #ffffff;
+  background: rgba(198, 232, 255, 0.08);
+  border-color: rgba(198, 232, 255, 0.45);
+}
+
+.poster__typography {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 100%;
+  margin-top: 1rem;
+}
+
+.type-block {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  font-family: "sztos-variable", "Zero", "Arial", sans-serif;
+  font-weight: 100;
+  font-variation-settings: "wdth" 100, "wght" 100;
+  line-height: 0.82;
+}
+
+.type-copy {
+  display: block;
+  position: relative;
+  padding: 0.25rem 0.4rem;
+  width: 100%;
+  line-height: inherit;
+  overflow: hidden;
+}
+
+.type-word {
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 320;
+  font-variation-settings: "wdth" 150, "wght" 320;
+}
+
+.type-word--light {
+  font-weight: 120;
+  font-variation-settings: "wdth" 150, "wght" 120;
+}
+
+.type-word--italic {
+  font-style: italic;
+}
+
+.type-word--bold {
+  font-weight: 520;
+  font-variation-settings: "wdth" 140, "wght" 520;
+}
+
+.type-copy--negative {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: #fff;
+  filter: invert(1);
+  pointer-events: none;
+  clip-path: inset(100% 0 0 0);
+}
+
+.type-block--small {
+  font-size: clamp(2.4rem, 5.8vw, 3.2rem);
+  font-weight: 100;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.type-block--medium {
+  font-size: clamp(3.2rem, 7vw, 4.6rem);
+  font-weight: 320;
+  font-variation-settings: "wdth" 150, "wght" 320;
+  letter-spacing: -0.06em;
+  color: #c6e8ff;
+}
+
+.type-block--big {
+  font-size: clamp(3.8rem, 8.5vw, 5.2rem);
+  font-weight: 100;
+  letter-spacing: -0.08em;
+  color: #ffffff;
+}
+
+.type-block--huge {
+  font-size: clamp(4.8rem, 10vw, 6.6rem);
+  font-weight: 320;
+  font-variation-settings: "wdth" 150, "wght" 320;
+  letter-spacing: -0.1em;
+  color: #c6e8ff;
+}
+
+.type-block--accent {
+  font-size: clamp(3.8rem, 8vw, 5rem);
+  font-weight: 100;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+}
+
+.typography-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.65rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.tag--bright {
+  background: rgba(255, 255, 255, 0.16);
+  color: #c6e8ff;
+}
+
+.tag--pink {
+  background: rgba(198, 232, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(198, 232, 255, 0.32);
+}
+
+.tag--dark {
+  background: rgba(255, 255, 255, 0.12);
+  color: #c6e8ff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.type-block--italic {
+  font-style: italic;
+}
+
+.poster__info {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 260px;
+  padding: 1.2rem 1.35rem;
+  background: rgba(18, 22, 30, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 30px;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(22px);
+  z-index: 2;
+}
+
+.poster__info--transparent {
+  background: rgba(22, 26, 38, 0.32);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.poster__peek {
+  position: absolute;
+  left: 0rem;
+  bottom: 0rem;
+  width: 360px;
+  height: 250px;
+  background-image: url("images/image%20ciel.jpg");
+  background-size: 520px auto;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  clip-path: polygon(
+    0 0,
+    12% 0,
+    12% 16%,
+    24% 16%,
+    24% 10%,
+    34% 10%,
+    34% 20%,
+    46% 20%,
+    46% 14%,
+    56% 14%,
+    56% 24%,
+    68% 24%,
+    68% 18%,
+    78% 18%,
+    78% 26%,
+    100% 26%,
+    100% 86%,
+    92% 86%,
+    92% 94%,
+    80% 94%,
+    80% 88%,
+    68% 88%,
+    68% 100%,
+    0 100%
+  );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 42px 92px rgba(0, 0, 0, 0.36);
+  filter: saturate(1.12) contrast(1.14) brightness(0.96) grayscale(0.02);
+  opacity: 0.98;
+  z-index: 1;
+}
+
+.poster__peek::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  width: 160px;
+  height: 130px;
+  background-image: url("images/image%20ciel.jpg");
+  background-size: 520px auto;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  clip-path: polygon(
+    0 0,
+    14% 0,
+    14% 18%,
+    26% 18%,
+    26% 12%,
+    36% 12%,
+    36% 22%,
+    48% 22%,
+    48% 16%,
+    58% 16%,
+    58% 26%,
+    70% 26%,
+    70% 20%,
+    80% 20%,
+    80% 28%,
+    100% 28%,
+    100% 84%,
+    90% 84%,
+    90% 92%,
+    76% 92%,
+    76% 86%,
+    64% 86%,
+    64% 100%,
+    0 100%
+  );
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.poster__peek::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 0 2px rgba(255, 255, 255, 0.015);
+  pointer-events: none;
+}
+
+.poster__info::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 88%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 15%, transparent 24%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 18%),
+    radial-gradient(circle at 80% 10%, rgba(187, 224, 255, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 35%);
+}
+
+.poster__info::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 20px 40px rgba(255, 255, 255, 0.02);
+}
+
+.event {
+  text-transform: uppercase;
+  font-family: "sztos-variable", "Zero", "Arial", sans-serif;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 300;
+  font-variation-settings: "wdth" 115, "wght" 300;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.date,
+.location {
+  font-family: "sztos-variable", "Zero", "Arial", sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  font-weight: 420;
+  font-variation-settings: "wdth" 115, "wght" 420;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.poster__info p + p {
+  margin-top: 0.22rem;
+}
+
+.poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.09), transparent 22%),
+              radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.06), transparent 18%);
+}
+
+.poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(243, 191, 117, 0.14), transparent 20%),
+              radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08), transparent 18%);
+}
+
+@media (max-width: 560px) {
+  .poster {
+    width: min(100vw, 420px);
+  }
+
+  .poster__content {
+    padding: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
