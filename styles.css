@@ -1,0 +1,114 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	line-height: 1.5;
+	font: inherit;
+	vertical-align: baseline;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	position: relative;
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+a {
+	color: inherit;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+input, button, textarea, select {
+	font: inherit;
+}
+
+input {
+	appearance: none;
+}
+
+audio, canvas, iframe, img, svg, video {
+	display: block;
+	max-width: 100%;
+}
+
+/* Prevents img without src to appear */
+img:not([src]) {
+	visibility: hidden;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Exemple d'intégration de font */
+
+/* Inter Variable 
+https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts
+*/
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  src: url('../fonts/InterVariable.ttf') format('ttf');
+}
+
+/* Inter Variable Italic */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  src: url('../fonts/InterVariable-Italic.ttf') format('ttf');
+}
+
+/* Placez votre CSS après cette ligne */
+
+/* Variables */
+:root {
+    --black: #111;
+    --white: #FFF;
+}
+
+body {
+    font-family: 'Inter', helvetica, arial, sans-serif;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1.5rem;
+    background-color: var(--white);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+}
