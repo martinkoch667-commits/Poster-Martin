@@ -143,12 +143,16 @@ canvas {
 }
 
 .type-copy {
-  display: block;
+  display: inline-block;
   position: relative;
   padding: 0.25rem 0.4rem;
-  width: 100%;
+  width: auto;
   line-height: inherit;
   overflow: hidden;
+}
+
+.type-copy--base {
+  position: relative;
 }
 
 .type-word {
@@ -179,10 +183,14 @@ canvas {
   height: 100%;
   top: 0;
   left: 0;
-  color: #fff;
-  filter: invert(1);
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  mix-blend-mode: normal;
   pointer-events: none;
+  opacity: 0;
   clip-path: inset(100% 0 0 0);
+  z-index: 1;
+  transition: opacity 0.12s ease;
 }
 
 .type-block--small {

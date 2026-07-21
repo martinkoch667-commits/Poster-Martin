@@ -127,10 +127,10 @@ function updateNegativeText() {
     });
 
   document.querySelectorAll('.type-copy--negative').forEach((negativeSpan) => {
-    const typeCopy = negativeSpan.parentElement;
-    if (!typeCopy || !typeCopy.classList.contains('type-copy')) return;
+    const parentCopy = negativeSpan.parentElement;
+    if (!parentCopy || !parentCopy.classList.contains('type-copy')) return;
 
-    const copyRect = typeCopy.getBoundingClientRect();
+    const copyRect = parentCopy.getBoundingClientRect();
     const relativeBlock = {
       left: copyRect.left - posterLeft,
       top: copyRect.top - posterTop,
@@ -158,25 +158,16 @@ function updateNegativeText() {
 
     if (overlaps.length === 0) {
       negativeSpan.style.clipPath = 'inset(100% 0 0 0)';
+      negativeSpan.style.opacity = '0';
       return;
     }
 
-    const union = overlaps.reduce((acc, overlap) => {
-      if (!acc) return { ...overlap };
-      return {
-        left: Math.min(acc.left, overlap.left),
-        top: Math.min(acc.top, overlap.top),
-        right: Math.max(acc.right, overlap.right),
-        bottom: Math.max(acc.bottom, overlap.bottom),
-      };
-    }, null);
+    const path = overlaps
+      .map((rect) => `M${rect.left} ${rect.top} H${rect.right} V${rect.bottom} H${rect.left} Z`)
+      .join(' ');
 
-    const insetTop = Math.max(0, union.top);
-    const insetLeft = Math.max(0, union.left);
-    const insetBottom = Math.max(0, relativeBlock.bottom - union.bottom);
-    const insetRight = Math.max(0, relativeBlock.right - union.right);
-
-    negativeSpan.style.clipPath = `inset(${insetTop}px ${insetRight}px ${insetBottom}px ${insetLeft}px)`;
+    negativeSpan.style.clipPath = `path('${path}')`;
+    negativeSpan.style.opacity = '1';
   });
 }
 
